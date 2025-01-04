@@ -16,23 +16,25 @@ class ChatChannel < ApplicationCable::Channel
     # Optionally, handle any cleanup here (e.g., notify other users that this user has left)
   end
 
-  def send_chat_message(data)
+  def receive(data)
     recipient_ids = data['recipient_ids']
     if recipient_ids.blank?
       reject_invalid_message("Recipient is required")
       return
     end
-
+    
     recipients = User.find(recipient_ids)
+    # Replace with Authentication current_user
 
+    current_user_id = data['user_id']
     all_recipients_are_valid = recipients.all? { |recipient| @conversation.users.include?(recipient) }
     unless all_recipients_are_valid
       reject_invalid_message("One or more recipients are not part of this conversation")
       return
     end
-
-    message = @conversation.messages.create!(user: current_user, body: data['message'])
-    message.recipients << recipients
+    
+    binding.pry
+    message = @conversation.messages.create!(user: current_user_id, body: data['message'], recipient_ids: recipient_ids)
 
     ActionCable.server.broadcast(
       "chat_#{@conversation.id}_channel", 
@@ -54,4 +56,5 @@ class ChatChannel < ApplicationCable::Channel
       error: error_message
     )
   end
+
 end
