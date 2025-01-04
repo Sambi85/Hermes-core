@@ -22,33 +22,31 @@ class ChatChannel < ApplicationCable::Channel
       reject_invalid_message("Recipient is required")
       return
     end
-    
-    recipients = User.find(recipient_ids)
-    # Replace with Authentication current_user
 
-    current_user_id = data['user_id']
+    current_user = User.find(1)  # Replace with Authentication current_user
+    recipients = User.find(recipient_ids)
+
     all_recipients_are_valid = recipients.all? { |recipient| @conversation.users.include?(recipient) }
     unless all_recipients_are_valid
       reject_invalid_message("One or more recipients are not part of this conversation")
       return
     end
     
-    binding.pry
-    message = @conversation.messages.create!(user: current_user_id, body: data['message'], recipient_ids: recipient_ids)
+    message = @conversation.messages.create!(user: current_user, body: data['message'], recipient_ids: recipient_ids)
 
     ActionCable.server.broadcast(
       "chat_#{@conversation.id}_channel", 
-      message: render_message(message) 
+      { 
+        body: message.body,
+        user_name: message.user.name,  # assuming you want to show the user's name
+        created_at: message.created_at.strftime('%Y-%m-%d %H:%M:%S')
+      }
     )
 
     Rails.logger.debug "Message sent: #{message.body}"
   end
 
   private
-
-  def render_message(message)
-    ApplicationController.renderer.render(partial: 'messages/message', locals: { message: message })
-  end
 
   def reject_invalid_message(error_message)
     ActionCable.server.broadcast(
