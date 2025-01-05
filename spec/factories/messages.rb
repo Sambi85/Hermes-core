@@ -8,7 +8,7 @@ FactoryBot.define do
     transient do
       custom_user { nil }
       custom_conversation { nil }
-      custom_recipients { [] }  
+      custom_recipients { [] }
     end
 
     after(:build) do |message, evaluator|
@@ -17,6 +17,8 @@ FactoryBot.define do
       if evaluator.custom_recipients.any?
         message.recipients = evaluator.custom_recipients
       end
+      # Assign sender_id to user_id
+      message.sender_id = message.user.id
     end
   end
 end
