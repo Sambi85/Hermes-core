@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :messages, only: [:create, :show, :destroy]
       resources :users, only: [:create, :show, :destroy]
-      resources :conversations, only: [:create, :show, :destroy] do
+      resources :conversations, only:  [:index, :show, :create, :update, :destroy]do
         resources :messages, only: [:create, :index, :show, :destroy]
       end
     end
