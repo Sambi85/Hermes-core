@@ -12,6 +12,14 @@ class User < ApplicationRecord
   before_validation :format_email
   before_validation :format_phone_number
 
+  def self.find_for_database_authentication(conditions)
+    if conditions[:name].present?
+      where(name: conditions[:name]).first
+    else
+      super
+    end
+  end
+
   def format_phone_number
     return if phone_number.blank?
 
