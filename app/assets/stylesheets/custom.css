@@ -1,0 +1,50 @@
+/* Styles specific to the sessions page */
+html, body {
+  height: 100%; /* Make sure the body takes the full height of the page */
+  margin: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  background-color: #f0f0f0; /* Optional: set a background color */
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Stack the form fields vertically */
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px; /* Increase padding inside input fields */
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f5f5f5;
+  color: #333;
+  margin-bottom: 15px; /* Add space below each input field */
+}
+
+.submit-button {
+  padding: 12px 25px; /* Add more padding around the button */
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin-top: 15px; /* Add space above the submit button */
+}
+
+.submit-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}

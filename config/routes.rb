@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
+  devise_scope :user do
+    get 'login', to: 'devise/sessions#new', as: 'login'
+  end
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     passwords: 'users/passwords'
