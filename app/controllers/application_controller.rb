@@ -1,11 +1,11 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  # Or if you want to prevent already logged in users from seeing the login page:
   before_action :redirect_if_logged_in, only: [:new]
 
   private
-  
+
+  # Redirect logged-in users away from the login page
   def redirect_if_logged_in
-    redirect_to root_path if user_signed_in?
+    redirect_to (ENV['FE_LANDING_URL'] ||'http://localhost:4000') if user_signed_in?
   end
 end

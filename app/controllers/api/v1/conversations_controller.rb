@@ -1,12 +1,12 @@
 # app/controllers/api/v1/conversations_controller.rb
 class Api::V1::ConversationsController < ActionController::API
+  before_action :authenticate_user!
   before_action :set_conversation, only: [:show, :update, :destroy, :index]
 
 
   # GET /api/v1/conversations
   def index
-    binding.pry
-    @conversations = Conversation.all
+    @conversations = current_user.conversations 
     render json: @conversations, status: :ok
   rescue => e
     Rails.logger.error "Error fetching all conversations: #{e.message}"

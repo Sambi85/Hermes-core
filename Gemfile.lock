@@ -97,6 +97,10 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_token_auth (1.2.5)
+      bcrypt (~> 3.0)
+      devise (> 3.5.2, < 5)
+      rails (>= 4.2.0, < 8.1)
     diff-lcs (1.5.1)
     dotenv (3.1.4)
     dotenv-rails (3.1.4)
@@ -177,6 +181,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.10)
+    rack-cors (2.0.2)
+      rack (>= 2.0.0)
     rack-proxy (0.7.7)
       rack
     rack-test (2.1.0)
@@ -311,6 +317,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   database_cleaner-active_record
   devise
+  devise_token_auth
   dotenv-rails
   factory_bot_rails
   jbuilder (~> 2.7)
@@ -318,6 +325,7 @@ DEPENDENCIES
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
+  rack-cors
   rails (= 6.1.7.10)
   redis (~> 4.0)
   rspec-rails
