@@ -21,7 +21,7 @@ class Api::V1::UsersController < ActionController::API
 
   # POST /api/v1/users
   def create
-    binding.pry
+
     @user = User.new(user_params)
     if @user.save
       render json: @user, status: :created

@@ -1,11 +1,12 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
-    @conversation = Conversation.find(params[:conversation_id])
-    
-    Rails.logger.debug "Subscribed to conversation: #{@conversation.id} by user: #{params[:user_id]}"
 
-    user = User.find(params[:user_id])
-    if @conversation.users.include?(user)
+    @conversation = Conversation.find(params[:conversation_id])
+    @current_user = User.find(params[:user_id]) # Need Devise Current User here...
+    
+    Rails.logger.debug "Subscribed to conversation: #{@conversation.id} by user_id: #{@current_user.id}"
+
+    if @conversation.users.include?(@current_user)
       stream_for @conversation
     else
       reject
@@ -17,60 +18,34 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    recipient_ids = data['recipient_ids']
 
+    recipient_ids = @conversation.users.pluck(:id)
     if recipient_ids.blank?
-      reject_invalid_message("Recipient is required")
+      reject_invalid_message("At least one recipient is required")
       return
     end
 
-    current_user = User.find_by(id: 1)  # Replace with dynamic user logic if needed
-
-    if current_user.nil?
-      reject_invalid_message("User not found")
-      return
-    end
-  
-    sender = data['user_id'] == current_user.id ? 'user' : 'other'
-    recipients = User.find(recipient_ids)
-
-    begin
-      parsed_identifier = JSON.parse(identifier)
-      puts parsed_identifier['channel']
-    rescue JSON::ParserError => e
-      puts "Error parsing JSON: #{e.message}"
-    end
-  
-    @conversation = Conversation.find(parsed_identifier['conversation_id']) # Make sure conversation is fetched correctly
-    all_recipients_are_valid = recipients.all? { |recipient| @conversation.users.include?(recipient) }
-    unless all_recipients_are_valid
-      reject_invalid_message("One or more recipients are not part of this conversation")
-      return
-    end
-  
-    recipient_ids = recipient_ids.uniq
-  
     message = @conversation.messages.create!(
-      user: current_user, 
+      user: @current_user, 
       body: data['message'], 
-      recipient_ids: recipient_ids,
-      sender_id: current_user.id
-    )
-  
+      recipient_ids: recipient_ids, 
+      sender_id: @current_user.id
+      )
+
     ActionCable.server.broadcast(
       "chat_#{@conversation.id}_channel", 
-      { 
-        body: message.body,
-        user_name: message.user.name,  # User name of the sender
-        sender: sender,
-        created_at: message.created_at.strftime('%Y-%m-%d %H:%M:%S')
-      }
+      render_message(message)
+
     )
   
     Rails.logger.debug "Message sent: #{message.body}"
   end  
 
   private
+
+  def render_message(message)
+      message.to_json
+  end
 
   def reject_invalid_message(error_message)
     ActionCable.server.broadcast(

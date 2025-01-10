@@ -11,17 +11,16 @@ module ApplicationCable
 
     # private
 
-    # def find_verified_user
-    #   if verified_user = User.find_by(id: cookies.signed[:user_id]) # Or another authentication method
-    #     verified_user
-    #   else
-    #     reject_unauthorized_connection
-    #   end
-    # end
+    def find_verified_user
 
-    # def current_user
-    #   @current_user
-    # end
+      verified_user = User.find_by(id: request.params[:user_id]) # WIP - Need to pass cookies from frontend...
+      
+      if verified_user
+        verified_user
+      else
+        reject_unauthorized_connection
+      end
+    end
 
     # def current_user=(user)
     #   @current_user = user
