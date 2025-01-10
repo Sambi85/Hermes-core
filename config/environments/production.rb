@@ -25,4 +25,9 @@ Rails.application.configure do
   end
 
   config.active_record.dump_schema_after_migration = false
+  # Serve static assets in production
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present? # Serve static assets in production
+  config.assets.paths << Rails.root.join("public", "build")
+  config.assets.compile = true 
+
 end

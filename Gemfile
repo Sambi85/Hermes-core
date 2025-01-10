@@ -16,6 +16,7 @@ gem 'jbuilder', '~> 2.7' #build JSON
 gem 'twilio-ruby' #SMS, MMS and RCS via an API
 gem 'bootsnap', '>= 1.4.4', require: false # Reduces boot times by caching
 gem 'devise' # for authentication
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] #debugger
