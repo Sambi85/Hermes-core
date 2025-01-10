@@ -23,4 +23,10 @@ Rails.application.configure do
   config.active_support.disallowed_deprecation_warnings = []
 
   config.enable_chat_ui = (ENV['ENABLE_CHAT_UI'] == 'true') #UI for chat room debugging in browser
+
+  # Action Cable
+  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present? # Serve static assets in production
+  config.assets.paths << Rails.root.join("public", "build")
+  config.assets.compile = true 
+  
 end
