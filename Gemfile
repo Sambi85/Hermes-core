@@ -22,6 +22,7 @@ gem 'secure_headers'
 gem 'rack-cors'
 gem 'jwt'
 
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] #debugger
   gem 'dotenv-rails'

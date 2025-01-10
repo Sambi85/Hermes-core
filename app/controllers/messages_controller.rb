@@ -44,8 +44,8 @@ class MessagesController < ApplicationController
 
   # GET /messages
   def index
-    # @messages = @conversation.messages.order(created_at: :asc)  # Retrieve messages for the conversation
-    # render json: @messages, status: :ok
+    @messages = @conversation.messages.order(created_at: :asc)  # Retrieve messages for the conversation
+    render json: @messages, status: :ok
   end
 
 

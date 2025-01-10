@@ -59,7 +59,7 @@ RSpec.describe User, type: :model do
     conversation.users << user2
   
     # Create message with recipients
-    message = Message.create!(conversation: conversation, body: "Hello World", user: user1, recipients: [user2])
+    message = Message.create!(conversation: conversation, body: "Hello World", user: user1, recipients: [user2], sender_id: user1.id )
   
     expect(message.recipients).to include(user2)
     expect(message.user).to eq(user1)

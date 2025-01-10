@@ -35,10 +35,11 @@ class ChatChannel < ApplicationCable::Channel
     ActionCable.server.broadcast(
       "chat_#{@conversation.id}_channel", 
       render_message(message)
-    )
 
+    )
+  
     Rails.logger.debug "Message sent: #{message.body}"
-  end
+  end  
 
   private
 
