@@ -321,6 +321,7 @@ DEPENDENCIES
   dotenv-rails
   factory_bot_rails
   jbuilder (~> 2.7)
+  jwt
   listen (~> 3.3)
   pg (~> 1.1)
   pry-rails

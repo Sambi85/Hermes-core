@@ -2,16 +2,12 @@ Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
   authenticated :user do
-    root to: 'conversations#index', as: :authenticated_root # Redirect to conversations page
-  end
-
-  unauthenticated :user do
-    root to: redirect('http://localhost:3000/users/sign_in') # Redirect to login page
+    root to: redirect(ENV['FE_LANDING_URL'] || 'http://localhost:4000'), as: :authenticated_root
   end
   
   devise_for :users, controllers: {
     registrations: 'users/registrations',
-    sessions: 'devise/sessions',
+    sessions: 'users/sessions',
     passwords: 'users/passwords'
   }
 
@@ -31,5 +27,4 @@ Rails.application.routes.draw do
     resources :messages, only: [:create, :index, :show, :destroy]
   end
 
-  # get 'debug_chat', to: 'conversations#debug_chat'  # This would show all messages or data for debugging
 end

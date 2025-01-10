@@ -1,5 +1,3 @@
-# app/controllers/conversations_controller.rb
-
 class ConversationsController < ApplicationController
   before_action :set_conversation, only: [:show, :edit, :update, :destroy]
 

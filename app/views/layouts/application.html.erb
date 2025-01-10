@@ -1,9 +1,12 @@
-<head>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= yield :styles %> <!-- This will inject the styles defined in the :styles content block -->
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-</head>
-<body>
-  <%= yield %> <!-- This will display the content from views like login page -->
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %> <!-- Include your Webpack-generated JS -->
+  </head>
+  <body>
+    <div id="root"></div> <!-- React will render inside this div -->
+  </body>
+</html>

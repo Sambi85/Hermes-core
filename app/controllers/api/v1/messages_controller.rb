@@ -12,6 +12,7 @@ class Api::V1::MessagesController < ActionController::API
   # POST /api/v1/messages
   def create
     @message = Message.new(message_params)
+    @recipients =  Conversation.find(params['conversation_id']).users
 
     if @message.save
       message_users = @recipients.map { |recipient| { message_id: @message.id, user_id: recipient.id } }

@@ -20,7 +20,7 @@ gem 'devise' # for authentication
 gem 'devise_token_auth'
 gem 'secure_headers'
 gem 'rack-cors'
-
+gem 'jwt'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] #debugger
