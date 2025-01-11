@@ -15,6 +15,4 @@ Devise.setup do |config|
   config.sign_out_via = :delete
   config.responder.error_status = :unprocessable_entity
   config.responder.redirect_status = :see_other
-  config.session_store :cookie_store, key: ENV['SESSION_KEY'] || '_default_session_key', secure: Rails.env.production?, same_site: :lax #Devise setup
-
 end
