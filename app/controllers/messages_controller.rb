@@ -56,16 +56,16 @@ class MessagesController < ApplicationController
     User.where(id: recipient_ids).where(id: conversation.users.pluck(:id))
   end
 
-  def send_sms_messages(recipients, message)
-    twilio_service = TwilioService.new
-    recipients.each do |recipient|
-      twilio_service.send_message(
-        from: message.user.phone_number,
-        to: recipient.phone_number,
-        body: message.body
-      )
-    end
-  end
+  # def send_sms_messages(recipients, message)
+  #   twilio_service = TwilioService.new
+  #   recipients.each do |recipient|
+  #     twilio_service.send_message(
+  #       from: message.user.phone_number,
+  #       to: recipient.phone_number,
+  #       body: message.body
+  #     )
+  #   end
+  # end
 
   private
   
