@@ -99,6 +99,9 @@ Run tests in local environment
   - RAILS_ENV=development bundle exec rspec
   - RAILS_ENV=development bundle exec rspec spec/models/<YOUR TARGET TEST FILE>.rb
 
+Redis in local (Ubuntu)
+  - Stop Redis Server: sudo systemctl stop redis-server.service
+
 
 # Testing Endpoints w/ Curl Commands
 User:

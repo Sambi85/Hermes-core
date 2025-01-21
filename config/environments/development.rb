@@ -31,6 +31,10 @@ Rails.application.configure do
   config.assets.debug = true
   config.assets.quiet = true
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  
+  # CORS configuration for cookies
+  config.action_dispatch.cookies_same_site_protection = :none
+
 
   config.enable_chat_ui = (ENV['ENABLE_CHAT_UI'] == 'true') #UI for chat room debugging in browser
 

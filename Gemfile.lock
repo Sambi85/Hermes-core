@@ -181,6 +181,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.10)
+    rack-attack (6.7.0)
+      rack (>= 1.0, < 4)
     rack-cors (2.0.2)
       rack (>= 2.0.0)
     rack-proxy (0.7.7)
@@ -326,6 +328,7 @@ DEPENDENCIES
   pg (~> 1.1)
   pry-rails
   puma (~> 5.0)
+  rack-attack
   rack-cors
   rails (= 6.1.7.10)
   redis (~> 4.0)

@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable'
 
-  authenticated :user do
-    root to: redirect(ENV['FE_LANDING_URL'] || 'http://localhost:4000'), as: :authenticated_root
-  end
-  
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     passwords: 'users/passwords'
   }
+
+  authenticated :user do
+    root to: redirect('http://localhost:4000'), as: :authenticated_root
+  end
 
   namespace :api do
     namespace :v1 do
@@ -21,10 +21,8 @@ Rails.application.routes.draw do
     end
   end
   
-
   resources :users, only: [:index, :show]
   resources :conversations, only: [:index, :show, :create] do
     resources :messages, only: [:create, :index, :show, :destroy]
   end
-
 end

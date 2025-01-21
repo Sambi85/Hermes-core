@@ -21,7 +21,7 @@ gem 'devise_token_auth'
 gem 'secure_headers'
 gem 'rack-cors'
 gem 'jwt'
-
+gem 'rack-attack'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw] #debugger

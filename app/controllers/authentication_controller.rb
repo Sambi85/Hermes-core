@@ -9,4 +9,8 @@ class AuthenticationController < ApplicationController
       render json: { error: 'Invalid credentials' }, status: :unauthorized
     end
   end
+
+  def logout
+    head :no_content
+  end
 end
