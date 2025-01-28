@@ -3,6 +3,10 @@ class ConversationsController < ApplicationController
 
   # GET /conversations
   def index
+
+    token = request.headers['Authorization']&.split(' ')&.last
+    Rails.logger.debug "Authorization Token: #{token}"  
+
     @conversations = Conversation.all
     render json: @conversations # Make sure to use @conversations here
     Rails.logger.info "Fetched #{@conversations.count} conversations"
