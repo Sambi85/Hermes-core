@@ -1,8 +1,8 @@
-# Hermes
+# Hermes Core
 ![My Image](public/hermes-logo.jpeg)
 
 
-# Summary
+# Summary - Currently WIP
 This project is a chat application built using Action Cable and SMS messaging. The goal is to create a real-time, interactive chat experience where users can communicate via both web and text messages. By leveraging Action Cable for seamless WebSocket connections and integrating SMS functionality, the app enables users to send and receive messages on the go. This side project will showcase my ability to combine modern web technologies with traditional communication methods, and I'll be documenting my progress here. Stay tuned for updates as I continue to develop and refine this project!
 
 - For a more technical overview of the project, please refer to the `DEV_NOTES.md` file.
